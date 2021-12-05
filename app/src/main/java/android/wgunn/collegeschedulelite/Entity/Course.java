@@ -5,11 +5,13 @@ import static androidx.room.ForeignKey.CASCADE;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.util.Arrays;
 import java.util.Date;
-
+import java.util.List;
 
 
 @Entity(
@@ -52,6 +54,7 @@ public class Course {
     private String instructorEmail;
 
     public Course(long termId, String title, Date startDate, Date endDate, String status, String instructorName, String instructorPhone, String instructorEmail) {
+
         this.termId = termId;
         this.title = title;
         this.startDate = startDate;
@@ -66,7 +69,7 @@ public class Course {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -74,7 +77,7 @@ public class Course {
         return termId;
     }
 
-    public void setTermId(long termId) {
+    public void setTermId(Long termId) {
         this.termId = termId;
     }
 

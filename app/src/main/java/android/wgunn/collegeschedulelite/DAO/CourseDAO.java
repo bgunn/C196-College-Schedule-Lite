@@ -13,6 +13,14 @@ import androidx.room.Update;
 
 import java.util.List;
 
+/**
+ * <pre>
+ * courseDAO interface
+ *
+ * This interface defines the standard CRUD operations to be
+ * performed on the Course entity
+ * </pre>
+ */
 @Dao
 public interface CourseDAO {
 

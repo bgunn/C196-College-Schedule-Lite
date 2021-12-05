@@ -7,6 +7,8 @@
     <string name="terms_scroll">Terms scroll</string>
     <string name="term">Term</string>
     <string name="courses">Courses</string>
+    <string name="term_courses_label">%1$s Courses</string>
+    <string name="all_courses_label">All Courses</string>
     <string name="dashboard">Dashboard</string>
     <string name="no_data">No Data</string>
     <string name="current_term_label"><b>Current Term:</b></string>
@@ -14,5 +16,8 @@
     <string name="in_progress_label"><b>In-progress:</b></string>
     <string name="completed_label"><b>Completed:</b></string>
     <string name="dropped_label"><b>Dropped:</b></string>
-    <string name="planned_label"><b>Planned:</b></string>
+    <string name="planned_label"><b>Plan to Take:</b></string>
+    <string name="completed_terms"><b>Completed Terms</b></string>
+    <string name="start_date_label"><b>Start date:</b></string>
+    <string name="end_date_label"><b>End date:</b></string>
 </resources>
