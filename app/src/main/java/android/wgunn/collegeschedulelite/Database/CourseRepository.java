@@ -4,9 +4,9 @@ import android.app.Application;
 import android.wgunn.collegeschedulelite.DAO.CourseAssessmentDAO;
 import android.wgunn.collegeschedulelite.DAO.CourseDAO;
 import android.wgunn.collegeschedulelite.DAO.CourseNoteDAO;
-import android.wgunn.collegeschedulelite.Entity.Course;
+import android.wgunn.collegeschedulelite.Entity.CourseEntity;
 import android.wgunn.collegeschedulelite.Entity.CourseAssessment;
-import android.wgunn.collegeschedulelite.Entity.CourseNote;
+import android.wgunn.collegeschedulelite.Entity.CourseNoteEntity;
 import android.wgunn.collegeschedulelite.Entity.CourseWithChildren;
 
 import java.util.ArrayList;
@@ -47,10 +47,10 @@ public class CourseRepository {
     /**
      * Get a course entity by ID
      *
-     * @param id The Course ID
+     * @param id The CourseEntity ID
      * @return The selected course or null
      */
-    public Course get(Long id) {
+    public CourseEntity get(Long id) {
         return courseDAO.load(id);
     }
 
@@ -70,7 +70,7 @@ public class CourseRepository {
      *
      * @return List of courses
      */
-    public List<Course> getAll() {
+    public List<CourseEntity> getAll() {
         return courseDAO.loadAll();
     }
 
@@ -88,11 +88,11 @@ public class CourseRepository {
      *
      * @return The list of courses
      */
-    public List<Course> getCoursesByStatus(String status) {
+    public List<CourseEntity> getCoursesByStatus(String status) {
 
-        List<Course> courses = new ArrayList<>();
+        List<CourseEntity> courses = new ArrayList<>();
 
-        for (Course course : courseDAO.loadAll()) {
+        for (CourseEntity course : courseDAO.loadAll()) {
             if (course.getStatus().equals(status)) {
                 courses.add(course);
             }
@@ -108,9 +108,9 @@ public class CourseRepository {
      * If an insert is done, the entity ID is set from the return value.
      * </pre>
      *
-     * @param course The Course entity
+     * @param course The CourseEntity entity
      */
-    public void save(Course course) {
+    public void save(CourseEntity course) {
         if (course.getId() == null) {
             course.setId(courseDAO.insert(course));
         } else {
@@ -121,19 +121,19 @@ public class CourseRepository {
     /**
      * Delete the provided course
      *
-     * @param course The Course entity
+     * @param course The CourseEntity entity
      */
-    public void delete(Course course) {
+    public void delete(CourseEntity course) {
         courseDAO.delete(course);
     }
 
     /**
      * Add a note and attach to a course
      *
-     * @param course The Course entity
-     * @param note The CourseNote entity
+     * @param course The CourseEntity entity
+     * @param note The CourseNoteEntity entity
      */
-    public void addNote(Course course, CourseNote note) {
+    public void addNote(CourseEntity course, CourseNoteEntity note) {
         note.setCourseId(course.getId());
         note.setId(courseNoteDAO.insert(note));
     }
@@ -141,19 +141,19 @@ public class CourseRepository {
     /**
      * Delete the provided note
      *
-     * @param note The CourseNote entity
+     * @param note The CourseNoteEntity entity
      */
-    public void deleteNote(CourseNote note) {
+    public void deleteNote(CourseNoteEntity note) {
         courseNoteDAO.delete(note);
     }
 
     /**
      * Add a note and attach to a course
      *
-     * @param course The Course entity
+     * @param course The CourseEntity entity
      * @param assessment The CourseAssessment entity
      */
-    public void addAssessment(Course course, CourseAssessment assessment) {
+    public void addAssessment(CourseEntity course, CourseAssessment assessment) {
         assessment.setCourseId(course.getId());
         assessment.setId(courseAssessmentDAO.insert(assessment));
     }

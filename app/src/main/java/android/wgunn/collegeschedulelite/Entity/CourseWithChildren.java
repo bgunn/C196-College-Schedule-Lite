@@ -1,10 +1,8 @@
 package android.wgunn.collegeschedulelite.Entity;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,7 +16,7 @@ import java.util.List;
 public class CourseWithChildren {
 
     @Embedded
-    public Course course;
+    public CourseEntity course;
 
     @Relation(
             parentColumn = "id",
@@ -30,5 +28,5 @@ public class CourseWithChildren {
         parentColumn = "id",
         entityColumn = "course_id"
     )
-    public List<CourseNote> notes;
+    public List<CourseNoteEntity> notes;
 }

@@ -11,12 +11,12 @@ import androidx.room.PrimaryKey;
 import java.time.LocalDateTime;
 /**
  * The CourseAssessment entity models a row in the course_assessments table. The CourseAssessment
- * represents a one-to-many relationship with a Course.
+ * represents a one-to-many relationship with a CourseEntity.
  */
 @Entity(
     tableName = "course_assessments",
     foreignKeys = @ForeignKey(
-            entity = Course.class,
+            entity = CourseEntity.class,
             parentColumns = "id",
             childColumns = "course_id",
             onDelete = CASCADE

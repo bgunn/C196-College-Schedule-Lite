@@ -7,15 +7,17 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.wgunn.collegeschedulelite.Database.TermRepository;
-import android.wgunn.collegeschedulelite.Entity.Term;
+import android.wgunn.collegeschedulelite.Entity.TermEntity;
 import android.wgunn.collegeschedulelite.R;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.List;
 import java.util.Objects;
 
-public class Terms extends AppCompatActivity {
+public class TermsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +30,15 @@ public class Terms extends AppCompatActivity {
 
         TermRepository termRepository = new TermRepository(getApplication());
 
-        List<Term> termsList = termRepository.getAll();
+        List<TermEntity> termsList = termRepository.getAll();
 
-        ArrayAdapter<Term> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, termsList);
+        ArrayAdapter<TermEntity> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, termsList);
         termsListView.setAdapter(adapter);
 
         adapter.notifyDataSetChanged();
 
         termsListView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(getApplicationContext(), TermDetail.class);
+            Intent intent = new Intent(getApplicationContext(), TermDetailActivity.class);
             intent.putExtra("termId", termsList.get(position).getId().intValue());
             startActivity(intent);
         });
@@ -53,7 +55,7 @@ public class Terms extends AppCompatActivity {
     }
 
     public void onAddTermFABClick(View view) {
-        Intent intent = new Intent(Terms.this, AddEditTerm.class);
+        Intent intent = new Intent(TermsActivity.this, AddEditTermActivity.class);
         startActivity(intent);
     }
 }

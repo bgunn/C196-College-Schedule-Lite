@@ -16,11 +16,11 @@ import java.util.List;
 public class TermWithCourses {
 
     @Embedded
-    public Term term;
+    public TermEntity term;
 
     @Relation(
             parentColumn = "id",
             entityColumn = "term_id"
     )
-    public List<Course> courses;
+    public List<CourseEntity> courses;
 }

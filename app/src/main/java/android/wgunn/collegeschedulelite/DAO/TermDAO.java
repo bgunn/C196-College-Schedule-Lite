@@ -1,6 +1,6 @@
 package android.wgunn.collegeschedulelite.DAO;
 
-import android.wgunn.collegeschedulelite.Entity.Term;
+import android.wgunn.collegeschedulelite.Entity.TermEntity;
 import android.wgunn.collegeschedulelite.Entity.TermWithCourses;
 
 import androidx.room.Dao;
@@ -18,7 +18,7 @@ import java.util.List;
  * termDAO interface
  *
  * This interface defines the standard CRUD operations to be
- * performed on the Term entity
+ * performed on the TermEntity entity
  * </pre>
  */
 @Dao
@@ -27,27 +27,27 @@ public interface TermDAO {
     /**
      * Insert a term entity into the database
      *
-     * @param term  The Term entity
+     * @param term  The TermEntity entity
      * @return The inserted record ID
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Long insert(Term term);
+    Long insert(TermEntity term);
 
     /**
      * Update a term database reccord
      *
-     * @param term  The Term entity
+     * @param term  The TermEntity entity
      */
     @Update
-    void update(Term term);
+    void update(TermEntity term);
 
     /**
      * Delete a term database record
      *
-     * @param term  The Term entity
+     * @param term  The TermEntity entity
      */
     @Delete
-    void delete(Term term);
+    void delete(TermEntity term);
 
     /**
      * Select a term record from the database by ID
@@ -56,7 +56,7 @@ public interface TermDAO {
      * @return The selected term entity
      */
     @Query("SELECT * FROM terms WHERE id = :id")
-    Term load(Long id);
+    TermEntity load(Long id);
 
     /**
      * <pre>
@@ -80,7 +80,7 @@ public interface TermDAO {
      * @return List of term entities
      */
     @Query("SELECT * FROM terms")
-    List<Term> loadAll();
+    List<TermEntity> loadAll();
 
     /**
      * <pre>

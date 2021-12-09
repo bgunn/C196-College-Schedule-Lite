@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CollegeScheduleLite">
         <activity
-            android:name=".UI.AddEditTerm"
+            android:name=".UI.CoursesActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.TermDetail"
+            android:name=".UI.AddEditTermActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.Terms"
+            android:name=".UI.TermDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.TermsActivity"
             android:exported="false"
             android:label="@string/my_terms" />
         <activity

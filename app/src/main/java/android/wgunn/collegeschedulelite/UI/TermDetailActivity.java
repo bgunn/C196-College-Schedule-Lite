@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.wgunn.collegeschedulelite.Database.TermRepository;
-import android.wgunn.collegeschedulelite.Entity.Course;
-import android.wgunn.collegeschedulelite.Entity.Term;
+import android.wgunn.collegeschedulelite.Entity.CourseEntity;
+import android.wgunn.collegeschedulelite.Entity.TermEntity;
 import android.wgunn.collegeschedulelite.Entity.TermWithCourses;
 import android.wgunn.collegeschedulelite.R;
 import android.widget.TextView;
@@ -17,10 +17,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Objects;
 
-public class TermDetail extends AppCompatActivity {
+public class TermDetailActivity extends AppCompatActivity {
 
-    private Term term;
-    private List<Course> courses;
+    private TermEntity term;
+    private List<CourseEntity> courses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class TermDetail extends AppCompatActivity {
         termCoursesLabel.setText(getString(R.string.term_courses_label, term.getName()));
 
         // Set counts for each course status type
-        for (Course course : courses) {
+        for (CourseEntity course : courses) {
             switch (course.getStatus()) {
                 case "in-progress": inprogress++; break;
                 case "completed": completed++; break;
@@ -101,7 +101,7 @@ public class TermDetail extends AppCompatActivity {
     }
 
     public void onEditTermButtonClick(View view) {
-        Intent intent = new Intent(getApplicationContext(), AddEditTerm.class);
+        Intent intent = new Intent(getApplicationContext(), AddEditTermActivity.class);
         intent.putExtra("termId", term.getId().intValue());
         startActivity(intent);
     }

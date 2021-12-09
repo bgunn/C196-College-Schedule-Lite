@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.Terms">
+    tools:context=".UI.TermsActivity">
 
     <ListView
         android:id="@+id/termsListView"
@@ -20,7 +20,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.50" />
+        app:layout_constraintVertical_bias="0.50" >
+    </ListView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addTermFAB"
@@ -33,7 +34,17 @@
         android:src="@android:drawable/ic_input_add"
         app:backgroundTint="@color/blue_500"
         app:fabSize="auto"
+        app:layout_constraintBottom_toTopOf="@+id/navFragment"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navFragment"
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        class="android.wgunn.collegeschedulelite.UI.NavFragment"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.188"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

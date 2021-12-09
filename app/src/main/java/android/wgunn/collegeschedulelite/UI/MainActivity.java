@@ -4,13 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.wgunn.collegeschedulelite.Database.CourseRepository;
 import android.wgunn.collegeschedulelite.Database.TermRepository;
-import android.wgunn.collegeschedulelite.Entity.Course;
-import android.wgunn.collegeschedulelite.Entity.Term;
+import android.wgunn.collegeschedulelite.Entity.CourseEntity;
+import android.wgunn.collegeschedulelite.Entity.TermEntity;
 import android.wgunn.collegeschedulelite.R;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         termRepository = new TermRepository(getApplication());
         courseRepository = new CourseRepository(getApplication());
 
-        //sampleData();
+        sampleData();
 
         setDashboardData();
     }
@@ -74,11 +72,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onTermsButtonClick(View view) {
-        Intent intent = new Intent(MainActivity.this, Terms.class);
+        Intent intent = new Intent(MainActivity.this, TermsActivity.class);
         startActivity(intent);
     }
 
     private void sampleData() {
+
+        if (termRepository.getAll().size() > 0) {
+            return;
+        }
 
         // Add a term
         Calendar start = Calendar.getInstance();
@@ -87,11 +89,11 @@ public class MainActivity extends AppCompatActivity {
         start.add(Calendar.MONTH, -2);
         end.add(Calendar.MONTH, 4);
 
-        Term term1 = new Term("Fall 2021", start.getTime(), end.getTime());
+        TermEntity term1 = new TermEntity("Fall 2021", start.getTime(), end.getTime());
 
         termRepository.save(term1);
 
-        Toast.makeText(this, "Term ID: " + term1.getId(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "TermEntity ID: " + term1.getId(), Toast.LENGTH_SHORT).show();
 
         // Add a course
         Calendar courseStart = Calendar.getInstance();
@@ -100,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         courseStart.add(Calendar.MONTH, 1);
         courseEnd.add(Calendar.MONTH, 2);
 
-        Course course1 = new Course(
+        CourseEntity course1 = new CourseEntity(
             term1.getId(),
             "C195",
             courseStart.getTime(),

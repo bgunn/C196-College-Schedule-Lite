@@ -2,7 +2,7 @@ package android.wgunn.collegeschedulelite.Database;
 
 import android.app.Application;
 import android.wgunn.collegeschedulelite.DAO.TermDAO;
-import android.wgunn.collegeschedulelite.Entity.Term;
+import android.wgunn.collegeschedulelite.Entity.TermEntity;
 import android.wgunn.collegeschedulelite.Entity.TermWithCourses;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class TermRepository {
      * @param id
      * @return The selected term or null
      */
-    public Term get(Long id) {
+    public TermEntity get(Long id) {
         return termDAO.load(id);
     }
 
@@ -43,11 +43,11 @@ public class TermRepository {
      *
      * @return The current term or null
      */
-    public Term getCurrentTerm() {
+    public TermEntity getCurrentTerm() {
 
         Date now = new Date();
 
-        for (Term term : termDAO.loadAll()) {
+        for (TermEntity term : termDAO.loadAll()) {
             if (now.after(term.getStartDate()) && now.before(term.getEndDate())) {
                 return term;
             }
@@ -61,13 +61,13 @@ public class TermRepository {
      *
      * @return The list of remaining terms
      */
-    public List<Term> getRemainingTerms() {
+    public List<TermEntity> getRemainingTerms() {
 
-        List<Term> terms = new ArrayList<>();
+        List<TermEntity> terms = new ArrayList<>();
 
         Date now = new Date();
 
-        for (Term term : termDAO.loadAll()) {
+        for (TermEntity term : termDAO.loadAll()) {
             if (term.getStartDate().after(now)) {
                 terms.add(term);
             }
@@ -81,13 +81,13 @@ public class TermRepository {
      *
      * @return The list of completed terms
      */
-    public List<Term> getCompletedTerms() {
+    public List<TermEntity> getCompletedTerms() {
 
-        List<Term> terms = new ArrayList<>();
+        List<TermEntity> terms = new ArrayList<>();
 
         Date now = new Date();
 
-        for (Term term : termDAO.loadAll()) {
+        for (TermEntity term : termDAO.loadAll()) {
             if (term.getEndDate().before(now)) {
                 terms.add(term);
             }
@@ -112,7 +112,7 @@ public class TermRepository {
      *
      * @return List of terms
      */
-    public List<Term> getAll() {
+    public List<TermEntity> getAll() {
         return termDAO.loadAll();
     }
 
@@ -134,7 +134,7 @@ public class TermRepository {
      *
      * @param term
      */
-    public void save(Term term) {
+    public void save(TermEntity term) {
         if (term.getId() == null) {
             term.setId(termDAO.insert(term));
         } else {
@@ -146,7 +146,7 @@ public class TermRepository {
      * Delete the provided term
      * @param term
      */
-    public void delete(Term term) {
+    public void delete(TermEntity term) {
         termDAO.delete(term);
     }
 }

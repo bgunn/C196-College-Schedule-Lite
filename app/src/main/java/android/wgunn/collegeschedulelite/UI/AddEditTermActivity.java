@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.wgunn.collegeschedulelite.Database.TermRepository;
-import android.wgunn.collegeschedulelite.Entity.Term;
+import android.wgunn.collegeschedulelite.Entity.TermEntity;
 import android.wgunn.collegeschedulelite.R;
 import android.wgunn.collegeschedulelite.Utilities.DatePickerFragment;
 import android.widget.DatePicker;
@@ -21,22 +21,25 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AddEditTerm extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class AddEditTermActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    private Term term;
+    private TermEntity term;
     private TermRepository termRepository;
     private TextView datePicker;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_term);
+
+        termRepository = new TermRepository(getApplication());
 
         Intent intent = getIntent();
         long termId = (long) intent.getIntExtra("termId", 0);
 
-        this.setTitle(termId == 0 ? "Add Term" : "Edit Term");
+        this.setTitle(termId == 0 ? "Add TermEntity" : "Edit TermEntity");
 
         if (termId != 0) {
             setEditTermData(termId);
@@ -44,8 +47,6 @@ public class AddEditTerm extends AppCompatActivity implements DatePickerDialog.O
     }
 
     public void setEditTermData(Long termId) {
-
-        termRepository = new TermRepository(getApplication());
 
         term = termRepository.get(termId);
 
@@ -95,11 +96,9 @@ public class AddEditTerm extends AppCompatActivity implements DatePickerDialog.O
         String startDateString = termStartDateData.getText().toString();
         String endDateString = termEndDateData.getText().toString();
 
-        Log.d("myDebug", "NAME: " + startDateString);
-        Log.d("myDebug", "START: " + startDateString);
-
+        // Validate the submitted data
         if (name.isEmpty()) {
-            Toast.makeText(this, "Term name is required", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "TermEntity name is required", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -113,14 +112,36 @@ public class AddEditTerm extends AppCompatActivity implements DatePickerDialog.O
             return;
         }
 
-        // Parse the date strings
+        // Attempt to parse the date strings
         try {
             startDate = simpleDateFormat.parse(startDateString);
             endDate = simpleDateFormat.parse(endDateString);
         } catch (ParseException e) {
-            Toast.makeText(this, "Error parsing date!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "ERROR: Failed to parse date", Toast.LENGTH_LONG).show();
             Log.e("myError", Log.getStackTraceString(e));
             return;
+        }
+
+        // Validate dates
+        if (endDate.before(startDate)) {
+            Toast.makeText(this, "ERROR: End date must come after start date", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        for (TermEntity t : termRepository.getAll()) {
+
+            long i = term != null ? term.getId() : 0;
+
+            if ((endDate.after(t.getStartDate()) && endDate.before(t.getEndDate()) ||
+                    (startDate.after(t.getStartDate()) && startDate.before(t.getEndDate())))
+            ) {
+
+                if (i == t.getId()) continue;
+
+                Toast.makeText(this, "ERROR: The specified dates overlap with term: " + t.toString(), Toast.LENGTH_LONG).show();
+
+                return;
+            }
         }
 
         if (term != null) {
@@ -129,7 +150,7 @@ public class AddEditTerm extends AppCompatActivity implements DatePickerDialog.O
             term.setEndDate(endDate);
             msg = "Successfully updated term " + term.getId();
         } else {
-            term = new Term(name, startDate, endDate);
+            term = new TermEntity(name, startDate, endDate);
             msg = "Successfully added term " + name;
         }
 
@@ -142,7 +163,7 @@ public class AddEditTerm extends AppCompatActivity implements DatePickerDialog.O
             return;
         }
 
-        Intent intent = new Intent(getApplicationContext(), TermDetail.class);
+        Intent intent = new Intent(getApplicationContext(), TermDetailActivity.class);
         intent.putExtra("termId", term.getId().intValue());
         startActivity(intent);
     }
