@@ -1,12 +1,13 @@
 package android.wgunn.collegeschedulelite.Database;
 
 import android.app.Application;
-import android.util.Log;
+import android.wgunn.collegeschedulelite.DAO.CourseAssessmentDAO;
 import android.wgunn.collegeschedulelite.DAO.CourseDAO;
 import android.wgunn.collegeschedulelite.DAO.CourseNoteDAO;
 import android.wgunn.collegeschedulelite.Entity.Course;
+import android.wgunn.collegeschedulelite.Entity.CourseAssessment;
 import android.wgunn.collegeschedulelite.Entity.CourseNote;
-import android.wgunn.collegeschedulelite.Entity.CourseWithNotes;
+import android.wgunn.collegeschedulelite.Entity.CourseWithChildren;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,11 @@ public class CourseRepository {
     private final CourseNoteDAO courseNoteDAO;
 
     /**
+     * The CourseAssessmentDAO object
+     */
+    private final CourseAssessmentDAO courseAssessmentDAO;
+
+    /**
      * Constructor gets the database instance and initialize the DAO's
      *
      * @param application The epplication context
@@ -35,6 +41,7 @@ public class CourseRepository {
         AppDatabase db = AppDatabase.getInstance(application);
         courseDAO = db.courseDAO();
         courseNoteDAO = db.courseNoteDAO();
+        courseAssessmentDAO = db.courseAssessmentDAO();
     }
 
     /**
@@ -54,7 +61,7 @@ public class CourseRepository {
      * @param id
      * @return The selected course with related courses
      */
-    public CourseWithNotes getWithNotes(Long id) {
+    public CourseWithChildren getWithNotes(Long id) {
         return courseDAO.loadWithNotes(id);
     }
 
@@ -72,8 +79,8 @@ public class CourseRepository {
      *
      * @return List of CourseWithNotes data objects
      */
-    public List<CourseWithNotes> getAllWithNotes() {
-        return courseDAO.loadAllWithNotes();
+    public List<CourseWithChildren> getAllWithNotes() {
+        return courseDAO.loadAllWithChildren();
     }
 
     /**
@@ -138,5 +145,25 @@ public class CourseRepository {
      */
     public void deleteNote(CourseNote note) {
         courseNoteDAO.delete(note);
+    }
+
+    /**
+     * Add a note and attach to a course
+     *
+     * @param course The Course entity
+     * @param assessment The CourseAssessment entity
+     */
+    public void addAssessment(Course course, CourseAssessment assessment) {
+        assessment.setCourseId(course.getId());
+        assessment.setId(courseAssessmentDAO.insert(assessment));
+    }
+
+    /**
+     * Delete the provided assessment
+     *
+     * @param assessment The CourseAssessment entity
+     */
+    public void deleteAssessment(CourseAssessment assessment) {
+        courseAssessmentDAO.delete(assessment);
     }
 }

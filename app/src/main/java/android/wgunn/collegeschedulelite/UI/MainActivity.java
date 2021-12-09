@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.wgunn.collegeschedulelite.Database.CourseRepository;
 import android.wgunn.collegeschedulelite.Database.TermRepository;
@@ -39,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
         termRepository = new TermRepository(getApplication());
         courseRepository = new CourseRepository(getApplication());
 
-        setDashboardData();
-
         //sampleData();
+
+        setDashboardData();
     }
 
     public void setDashboardData() {

@@ -1,7 +1,7 @@
 package android.wgunn.collegeschedulelite.DAO;
 
 import android.wgunn.collegeschedulelite.Entity.Course;
-import android.wgunn.collegeschedulelite.Entity.CourseWithNotes;
+import android.wgunn.collegeschedulelite.Entity.CourseWithChildren;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -38,12 +38,12 @@ public interface CourseDAO {
 
     @Transaction
     @Query("SELECT * FROM courses WHERE id = :id")
-    CourseWithNotes loadWithNotes(Long id);
+    CourseWithChildren loadWithNotes(Long id);
 
     @Query("SELECT * FROM courses")
     List<Course> loadAll();
 
     @Transaction
     @Query("SELECT * FROM courses")
-    public List<CourseWithNotes> loadAllWithNotes();
+    public List<CourseWithChildren> loadAllWithChildren();
 }

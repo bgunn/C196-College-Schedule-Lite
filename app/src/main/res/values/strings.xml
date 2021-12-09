@@ -17,7 +17,21 @@
     <string name="completed_label"><b>Completed:</b></string>
     <string name="dropped_label"><b>Dropped:</b></string>
     <string name="planned_label"><b>Plan to Take:</b></string>
-    <string name="completed_terms"><b>Completed Terms</b></string>
+    <string name="completed_terms"><b>Completed Terms:</b></string>
     <string name="start_date_label"><b>Start date:</b></string>
     <string name="end_date_label"><b>End date:</b></string>
+    <string name="name_field_label"><b>Name:</b></string>
+    <string name="term_name_hint">Fall 2021</string>
+    <string name="start_date"><b>Start Date:</b></string>
+    <string name="start_date_hint">Select start date</string>
+    <string name="end_date_hint">Select end date</string>
+    <string name="end_date"><b>End Date:</b></string>
+    <string name="view_courses">View Courses</string>
+    <string name="edit_term">Edit Term</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="home">Home</string>
+    <string name="assessments">Assessments</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

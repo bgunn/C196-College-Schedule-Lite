@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.wgunn.collegeschedulelite.Database.TermRepository;
@@ -54,8 +53,7 @@ public class Terms extends AppCompatActivity {
     }
 
     public void onAddTermFABClick(View view) {
-        // TODO: This will be the add term form
-        Intent intent = new Intent(Terms.this, TermDetail.class);
+        Intent intent = new Intent(Terms.this, AddEditTerm.class);
         startActivity(intent);
     }
 }

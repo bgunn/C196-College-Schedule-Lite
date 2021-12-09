@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.wgunn.collegeschedulelite.Database.TermRepository;
 import android.wgunn.collegeschedulelite.Entity.Course;
 import android.wgunn.collegeschedulelite.Entity.Term;
@@ -29,10 +30,10 @@ public class TermDetail extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
-        int termId = intent.getIntExtra("termId", 0);
+        long termId = intent.getIntExtra("termId", 0);
 
         TermRepository termRepository = new TermRepository(getApplication());
-        TermWithCourses termWithCourses = termRepository.getWithCourses((long) termId);
+        TermWithCourses termWithCourses = termRepository.getWithCourses(termId);
 
         term = termWithCourses.term;
         courses = termWithCourses.courses;
@@ -93,5 +94,15 @@ public class TermDetail extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onCoursesButtonClick(View view) {
+
+    }
+
+    public void onEditTermButtonClick(View view) {
+        Intent intent = new Intent(getApplicationContext(), AddEditTerm.class);
+        intent.putExtra("termId", term.getId().intValue());
+        startActivity(intent);
     }
 }

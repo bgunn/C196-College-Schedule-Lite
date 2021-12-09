@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/no_data"
                 android:textColor="@color/black"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="10dp"
                 app:layout_constraintStart_toEndOf="@+id/completedTermsLabel"
                 app:layout_constraintTop_toTopOf="@+id/completedTermsLabel" />
 
@@ -122,7 +122,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/all_courses_label"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -220,17 +219,14 @@
 
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/termsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue_700"
-        android:onClick="onTermsButtonClick"
-        android:text="@string/terms"
+    <fragment
+        android:id="@+id/navFragment"
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        class="android.wgunn.collegeschedulelite.UI.NavFragment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.188"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

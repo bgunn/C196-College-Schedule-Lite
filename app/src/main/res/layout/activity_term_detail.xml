@@ -100,10 +100,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/no_data"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#37474F"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -197,5 +197,28 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/coursesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue_700"
+        android:onClick="onCoursesButtonClick"
+        android:text="@string/view_courses"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.188"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/editTermButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:backgroundTint="@color/blue_700"
+        android:onClick="onEditTermButtonClick"
+        android:text="@string/edit_term"
+        app:layout_constraintStart_toEndOf="@+id/coursesButton"
+        app:layout_constraintTop_toTopOf="@+id/coursesButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,12 @@
 package android.wgunn.collegeschedulelite.Database;
 
 import android.content.Context;
+import android.wgunn.collegeschedulelite.DAO.CourseAssessmentDAO;
 import android.wgunn.collegeschedulelite.DAO.CourseDAO;
 import android.wgunn.collegeschedulelite.DAO.CourseNoteDAO;
 import android.wgunn.collegeschedulelite.DAO.TermDAO;
 import android.wgunn.collegeschedulelite.Entity.Course;
+import android.wgunn.collegeschedulelite.Entity.CourseAssessment;
 import android.wgunn.collegeschedulelite.Entity.CourseNote;
 import android.wgunn.collegeschedulelite.Entity.Term;
 
@@ -13,7 +15,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {Term.class, Course.class, CourseNote.class}, version = 4, exportSchema = false)
+@Database(entities = {Term.class, Course.class, CourseAssessment.class, CourseNote.class}, version = 5, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -24,6 +26,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract TermDAO termDAO();
 
     public abstract CourseDAO courseDAO();
+
+    public abstract CourseAssessmentDAO courseAssessmentDAO();
 
     public abstract CourseNoteDAO courseNoteDAO();
 
