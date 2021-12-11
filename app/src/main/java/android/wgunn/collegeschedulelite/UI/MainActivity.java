@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onTermsButtonClick(View view) {
-        Intent intent = new Intent(MainActivity.this, TermsActivity.class);
+        Intent intent = new Intent(MainActivity.this, TermListActivity.class);
         startActivity(intent);
     }
 

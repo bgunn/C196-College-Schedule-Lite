@@ -39,7 +39,7 @@ public class AddEditTermActivity extends AppCompatActivity implements DatePicker
         Intent intent = getIntent();
         long termId = (long) intent.getIntExtra("termId", 0);
 
-        this.setTitle(termId == 0 ? "Add TermEntity" : "Edit TermEntity");
+        this.setTitle(termId == 0 ? "Add Term" : "Edit Term");
 
         if (termId != 0) {
             setEditTermData(termId);

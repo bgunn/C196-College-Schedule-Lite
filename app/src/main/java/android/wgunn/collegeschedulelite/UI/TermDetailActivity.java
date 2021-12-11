@@ -6,14 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.wgunn.collegeschedulelite.Database.TermRepository;
 import android.wgunn.collegeschedulelite.Entity.CourseEntity;
 import android.wgunn.collegeschedulelite.Entity.TermEntity;
 import android.wgunn.collegeschedulelite.Entity.TermWithCourses;
 import android.wgunn.collegeschedulelite.R;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -63,8 +67,9 @@ public class TermDetailActivity extends AppCompatActivity {
         TextView termCoursesLabel = findViewById(R.id.termCoursesLabel);
         termCoursesLabel.setText(getString(R.string.term_courses_label, term.getName()));
 
-        // Set counts for each course status type
+        // Set counts for each course status type and populate the list array
         for (CourseEntity course : courses) {
+
             switch (course.getStatus()) {
                 case "in-progress": inprogress++; break;
                 case "completed": completed++; break;
@@ -84,6 +89,37 @@ public class TermDetailActivity extends AppCompatActivity {
 
         TextView plannedCoursesData = findViewById(R.id.plannedCoursesData);
         plannedCoursesData.setText(String.valueOf(planned));
+
+        // Show associated courses
+        ListView coursesListView = findViewById(R.id.coursesListView);
+
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.course_list_item, R.id.courseListItemTitle, courses) {
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+
+                View view = super.getView(position, convertView, parent);
+                TextView title = (TextView) view.findViewById(R.id.courseListItemTitle);
+                TextView status = (TextView) view.findViewById(R.id.courseListItemStatus);
+                TextView start = (TextView) view.findViewById(R.id.courseListItemStart);
+
+                title.setText(courses.get(position).getTitle());
+                status.setText(courses.get(position).getStatus());
+                start.setText(simpleDateFormat.format(courses.get(position).getStartDate()));
+
+                return view;
+            }
+        };
+
+        coursesListView.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+
+        coursesListView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(getApplicationContext(), TermDetailActivity.class);
+            intent.putExtra("termId", courses.get(position).getId().intValue());
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -96,8 +132,10 @@ public class TermDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onCoursesButtonClick(View view) {
-
+    public void onAddCourseButtonClick(View view) {
+        Intent intent = new Intent(getApplicationContext(), AddEditTermActivity.class);
+        intent.putExtra("termId", term.getId().intValue());
+        startActivity(intent);
     }
 
     public void onEditTermButtonClick(View view) {

@@ -5,11 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.wgunn.collegeschedulelite.R;
 
-public class CoursesActivity extends AppCompatActivity {
+public class CourseListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_courses);
+        setContentView(R.layout.activity_course_list);
     }
 }

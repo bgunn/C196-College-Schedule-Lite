@@ -8,6 +8,7 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -236,10 +237,9 @@ public class CourseEntity {
 
     @Override
     public String toString() {
-        return "CourseEntity{" +
-                "title='" + title + '\'' +
-                ", startDate=" + startDate +
-                ", instructorName='" + instructorName + '\'' +
-                '}';
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String s = status.substring(0, 1).toUpperCase() + status.substring(1);
+        // sdf.format(startDate)
+        return String.format("%-35s %30s", title, s);
     }
 }

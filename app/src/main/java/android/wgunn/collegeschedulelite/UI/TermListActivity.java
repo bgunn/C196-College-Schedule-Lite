@@ -12,18 +12,16 @@ import android.wgunn.collegeschedulelite.R;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import java.util.List;
 import java.util.Objects;
 
-public class TermsActivity extends AppCompatActivity {
+public class TermListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_terms);
+        setContentView(R.layout.activity_term_list);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         ListView termsListView = findViewById(R.id.termsListView);
@@ -55,7 +53,7 @@ public class TermsActivity extends AppCompatActivity {
     }
 
     public void onAddTermFABClick(View view) {
-        Intent intent = new Intent(TermsActivity.this, AddEditTermActivity.class);
+        Intent intent = new Intent(TermListActivity.this, AddEditTermActivity.class);
         startActivity(intent);
     }
 }

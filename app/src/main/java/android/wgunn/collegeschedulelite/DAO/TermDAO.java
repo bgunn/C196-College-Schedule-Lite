@@ -79,7 +79,7 @@ public interface TermDAO {
      *
      * @return List of term entities
      */
-    @Query("SELECT * FROM terms")
+    @Query("SELECT * FROM terms ORDER BY start_date ASC")
     List<TermEntity> loadAll();
 
     /**
@@ -94,6 +94,6 @@ public interface TermDAO {
      * @return List of TermWithCourses objects
      */
     @Transaction
-    @Query("SELECT * FROM terms")
+    @Query("SELECT * FROM terms ORDER BY start_date ASC")
     List<TermWithCourses> loadAllWithCourses();
 }

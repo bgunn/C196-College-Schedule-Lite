@@ -123,7 +123,8 @@ public class TermEntity {
     @NonNull
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        return name + " - " + sdf.format(startDate) + " to " + sdf.format(endDate);
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //return name + " - " + sdf.format(startDate) + " to " + sdf.format(endDate);
+        return name;
     }
 }

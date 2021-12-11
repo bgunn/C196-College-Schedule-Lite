@@ -55,9 +55,9 @@ public class NavFragment extends Fragment implements View.OnClickListener {
 
         if (c.contains("MainActivity")) {
             bottomNavigationView.setSelectedItemId(R.id.action_home);
-        } else if (c.contains("TermsActivity")) {
+        } else if (c.contains("TermListActivity")) {
             bottomNavigationView.setSelectedItemId(R.id.action_terms);
-        } else if (c.contains("CoursesActivity")) {
+        } else if (c.contains("CourseListActivity")) {
             bottomNavigationView.setSelectedItemId(R.id.action_courses);
         } else if (c.contains("AssessmentsActivity")) {
             bottomNavigationView.setSelectedItemId(R.id.action_assessments);
@@ -74,15 +74,15 @@ public class NavFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.action_terms:
-                startActivity(new Intent(requireActivity().getApplicationContext(), TermsActivity.class));
+                startActivity(new Intent(requireActivity().getApplicationContext(), TermListActivity.class));
                 break;
 
             case R.id.action_courses:
-                startActivity(new Intent(requireActivity().getApplicationContext(), TermsActivity.class));
+                startActivity(new Intent(requireActivity().getApplicationContext(), TermListActivity.class));
                 break;
 
             case R.id.action_assessments:
-                startActivity(new Intent(requireActivity().getApplicationContext(), TermsActivity.class));
+                startActivity(new Intent(requireActivity().getApplicationContext(), TermListActivity.class));
                 break;
         }
     }

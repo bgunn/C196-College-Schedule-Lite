@@ -10,7 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CollegeScheduleLite">
         <activity
-            android:name=".UI.CoursesActivity"
+            android:name=".UI.AddEditCourseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.CourseDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.CourseListActivity"
             android:exported="false" />
         <activity
             android:name=".UI.AddEditTermActivity"
@@ -19,7 +25,7 @@
             android:name=".UI.TermDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.TermsActivity"
+            android:name=".UI.TermListActivity"
             android:exported="false"
             android:label="@string/my_terms" />
         <activity
