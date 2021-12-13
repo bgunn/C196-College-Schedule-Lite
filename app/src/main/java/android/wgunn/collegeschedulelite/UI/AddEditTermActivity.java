@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class AddEditTermActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -98,7 +99,7 @@ public class AddEditTermActivity extends AppCompatActivity implements DatePicker
 
         // Validate the submitted data
         if (name.isEmpty()) {
-            Toast.makeText(this, "TermEntity name is required", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Term name is required", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -117,13 +118,13 @@ public class AddEditTermActivity extends AppCompatActivity implements DatePicker
             startDate = simpleDateFormat.parse(startDateString);
             endDate = simpleDateFormat.parse(endDateString);
         } catch (ParseException e) {
-            Toast.makeText(this, "ERROR: Failed to parse date", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "ERROR: Date must be in the format yyyy-mm-dd", Toast.LENGTH_LONG).show();
             Log.e("myError", Log.getStackTraceString(e));
             return;
         }
 
         // Validate dates
-        if (endDate.before(startDate)) {
+        if (Objects.requireNonNull(endDate).before(startDate)) {
             Toast.makeText(this, "ERROR: End date must come after start date", Toast.LENGTH_LONG).show();
             return;
         }
@@ -133,7 +134,7 @@ public class AddEditTermActivity extends AppCompatActivity implements DatePicker
             long i = term != null ? term.getId() : 0;
 
             if ((endDate.after(t.getStartDate()) && endDate.before(t.getEndDate()) ||
-                    (startDate.after(t.getStartDate()) && startDate.before(t.getEndDate())))
+                    (Objects.requireNonNull(startDate).after(t.getStartDate()) && startDate.before(t.getEndDate())))
             ) {
 
                 if (i == t.getId()) continue;
@@ -158,7 +159,7 @@ public class AddEditTermActivity extends AppCompatActivity implements DatePicker
             termRepository.save(term);
             Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         } catch (Exception e) {
-            Toast.makeText(this, "Error saving term to the database!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Error saving term!", Toast.LENGTH_LONG).show();
             Log.e("myError", Log.getStackTraceString(e));
             return;
         }

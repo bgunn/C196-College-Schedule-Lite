@@ -78,7 +78,7 @@ public class NavFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.action_courses:
-                startActivity(new Intent(requireActivity().getApplicationContext(), TermListActivity.class));
+                startActivity(new Intent(requireActivity().getApplicationContext(), CourseListActivity.class));
                 break;
 
             case R.id.action_assessments:

@@ -7,79 +7,196 @@
     tools:context=".UI.AddEditCourseActivity">
 
     <TextView
-        android:id="@+id/courseTitleLabel"
+        android:id="@+id/titleLabel"
         android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="42dp"
-        android:gravity="right|center_vertical"
+        android:gravity="end|center_vertical"
         android:text="@string/title_field_label"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/titleData"
+        android:layout_width="220dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:gravity="center_vertical"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/titleLabel"
+        app:layout_constraintTop_toTopOf="@+id/titleLabel" />
+
     <TextView
-        android:id="@+id/courseStartDateLabel"
+        android:id="@+id/startDateLabel"
         android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:text="@string/start_date"
         android:textColor="@color/black"
         android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
-        android:gravity="right|center_vertical"
+        android:gravity="end|center_vertical"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseTitleLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
 
     <TextView
-        android:id="@+id/courseEndDateLabel"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:text="@string/end_date"
-        android:textColor="@color/black"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="16dp"
-        android:gravity="right|center_vertical"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseStartDateLabel" />
-
-    <EditText
-        android:id="@+id/courseTitleData"
+        android:id="@+id/startDateData"
         android:layout_width="220dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:gravity="center_vertical"
-        android:hint="@string/course_title_hint"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        app:layout_constraintStart_toEndOf="@+id/courseTitleLabel"
-        app:layout_constraintTop_toTopOf="@+id/courseTitleLabel" />
-
-    <TextView
-        android:id="@+id/courseStartDateData"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="15dp"
         android:gravity="center_vertical"
         android:hint="@string/start_date_hint"
         android:onClick="showStartDatePickerDialog"
-        app:layout_constraintStart_toEndOf="@+id/courseStartDateLabel"
-        app:layout_constraintTop_toTopOf="@+id/courseStartDateLabel"
-        app:drawableLeftCompat="@drawable/ic_calendar_foreground" />
+        app:drawableLeftCompat="@drawable/ic_calendar_foreground"
+        app:layout_constraintStart_toEndOf="@+id/startDateLabel"
+        app:layout_constraintTop_toTopOf="@+id/startDateLabel" />
 
     <TextView
-        android:id="@+id/courseEndDateData"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
+        android:id="@+id/endDateLabel"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:text="@string/end_date"
+        android:textColor="@color/black"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:gravity="end|center_vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startDateLabel" />
+
+    <TextView
+        android:id="@+id/endDateData"
+        android:layout_width="220dp"
+        android:layout_height="48dp"
         android:layout_marginStart="15dp"
         android:gravity="center_vertical"
         android:hint="@string/end_date_hint"
         android:onClick="showEndDatePickerDialog"
-        app:layout_constraintStart_toEndOf="@+id/courseEndDateLabel"
-        app:layout_constraintTop_toTopOf="@+id/courseEndDateLabel"
-        app:drawableLeftCompat="@drawable/ic_calendar_foreground" />
+        app:drawableLeftCompat="@drawable/ic_calendar_foreground"
+        app:layout_constraintStart_toEndOf="@+id/endDateLabel"
+        app:layout_constraintTop_toTopOf="@+id/endDateLabel" />
+
+    <TextView
+        android:id="@+id/statusLabel"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:text="@string/status_field_label"
+        android:textColor="@color/black"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:gravity="end|center_vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/endDateLabel" />
+
+    <Spinner
+        android:id="@+id/statusSelector"
+        android:layout_width="220dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toEndOf="@+id/statusLabel"
+        app:layout_constraintTop_toTopOf="@+id/statusLabel" />
+
+    <TextView
+        android:id="@+id/instructorNameLabel"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:gravity="end|center_vertical"
+        android:text="@string/instructor_name_field_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statusLabel" />
+
+    <EditText
+        android:id="@+id/instructorNameData"
+        android:layout_width="220dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:gravity="center_vertical"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/instructorNameLabel"
+        app:layout_constraintTop_toTopOf="@+id/instructorNameLabel" />
+
+    <TextView
+        android:id="@+id/instructorEmailLabel"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:gravity="end|center_vertical"
+        android:text="@string/instructor_email_field_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instructorNameLabel" />
+
+    <EditText
+        android:id="@+id/instructorEmailData"
+        android:layout_width="220dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:gravity="center_vertical"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toEndOf="@+id/instructorEmailLabel"
+        app:layout_constraintTop_toTopOf="@+id/instructorEmailLabel" />
+
+    <TextView
+        android:id="@+id/instructorPhoneLabel"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:gravity="end|center_vertical"
+        android:text="@string/instructor_phone_field_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instructorEmailLabel" />
+
+    <EditText
+        android:id="@+id/instructorPhoneData"
+        android:layout_width="220dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:gravity="center_vertical"
+        android:importantForAutofill="no"
+        android:inputType="phone"
+        app:layout_constraintStart_toEndOf="@+id/instructorPhoneLabel"
+        app:layout_constraintTop_toTopOf="@+id/instructorPhoneLabel" />
+
+    <TextView
+        android:id="@+id/termLabel"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:text="@string/term_field_label"
+        android:textColor="@color/black"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:gravity="end|center_vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instructorPhoneLabel" />
+
+    <Spinner
+        android:id="@+id/termSelector"
+        android:layout_width="220dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toEndOf="@+id/termLabel"
+        app:layout_constraintTop_toTopOf="@+id/termLabel" />
 
     <Button
         android:id="@+id/saveButton"

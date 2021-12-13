@@ -22,7 +22,7 @@ public class CourseWithChildren {
             parentColumn = "id",
             entityColumn = "course_id"
     )
-    public List<CourseAssessment> assessments;
+    public List<CourseAssessmentEntity> assessments;
 
     @Relation(
         parentColumn = "id",

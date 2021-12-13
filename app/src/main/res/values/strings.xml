@@ -35,8 +35,16 @@
     <string name="title_heading"><b>Title</b></string>
     <string name="status_heading"><b>Status</b></string>
     <string name="start_heading"><b>Start</b></string>
+    <string name="term_heading"><b>Term</b></string>
     <string name="edit">Edit</string>
     <string name="add_course">Add Course</string>
     <string name="title_field_label"><b>Title:</b></string>
-    <string name="course_title_hint"><font size="4">Mobile Application Development – C196</font></string>
+    <string name="term_field_label"><b>Term:</b></string>
+    <string name="status_field_label"><b>Status:</b></string>
+    <string name="instructor_name_field_label"><b>Instructor Name:</b></string>
+    <string name="instructor_email_field_label"><b>Instructor Email:</b></string>
+    <string name="instructor_phone_field_label"><b>Instructor Phone:</b></string>
+    <string name="my_courses">My Courses</string>
+    <string name="notes_heading"><b>Notes:</b></string>
+    <string name="assessments_heading"><b>Assessments:</b></string>
 </resources>

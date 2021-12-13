@@ -2,11 +2,14 @@ package android.wgunn.collegeschedulelite.Entity;
 
 import static androidx.room.ForeignKey.CASCADE;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+
+import java.util.Date;
 
 /**
  * The CourseNoteEntity entity models a row in the course_notes table. The CourseNoteEntity
@@ -41,6 +44,17 @@ public class CourseNoteEntity {
      */
     @ColumnInfo(name = "note")
     private String note;
+
+    /**
+     * The public constructor
+     *
+     * @param note The course note
+     * @param courseId The course ID
+     */
+    public CourseNoteEntity(@NonNull String note, Long courseId) {
+        this.note = note;
+        this.courseId = courseId;
+    }
 
     /**
      * The course note ID getter

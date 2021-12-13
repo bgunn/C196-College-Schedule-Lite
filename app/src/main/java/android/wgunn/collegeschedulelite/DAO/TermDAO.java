@@ -59,6 +59,15 @@ public interface TermDAO {
     TermEntity load(Long id);
 
     /**
+     * Select a term record from the database by name
+     *
+     * @param name  The term name
+     * @return The selected term entity
+     */
+    @Query("SELECT * FROM terms WHERE name = :name")
+    TermEntity loadByName(String name);
+
+    /**
      * <pre>
      * Select a term record from the database by ID and additionally select
      * and include all related course records.

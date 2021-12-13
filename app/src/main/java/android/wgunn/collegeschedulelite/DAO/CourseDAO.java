@@ -38,7 +38,7 @@ public interface CourseDAO {
 
     @Transaction
     @Query("SELECT * FROM courses WHERE id = :id")
-    CourseWithChildren loadWithNotes(Long id);
+    CourseWithChildren loadWithChildren(Long id);
 
     @Query("SELECT * FROM courses ORDER BY start_date ASC")
     List<CourseEntity> loadAll();

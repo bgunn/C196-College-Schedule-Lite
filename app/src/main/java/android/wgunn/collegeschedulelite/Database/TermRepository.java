@@ -31,11 +31,21 @@ public class TermRepository {
     /**
      * Get a term entity by ID
      *
-     * @param id
+     * @param id The term ID
      * @return The selected term or null
      */
     public TermEntity get(Long id) {
         return termDAO.load(id);
+    }
+
+    /**
+     * Get a term entity by name
+     *
+     * @param name The term name
+     * @return The selected term or null
+     */
+    public TermEntity getByName(String name) {
+        return termDAO.loadByName(name);
     }
 
     /**

@@ -116,8 +116,8 @@ public class TermDetailActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
         coursesListView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(getApplicationContext(), TermDetailActivity.class);
-            intent.putExtra("termId", courses.get(position).getId().intValue());
+            Intent intent = new Intent(getApplicationContext(), CourseDetailActivity.class);
+            intent.putExtra("courseId", courses.get(position).getId().intValue());
             startActivity(intent);
         });
     }
@@ -133,7 +133,7 @@ public class TermDetailActivity extends AppCompatActivity {
     }
 
     public void onAddCourseButtonClick(View view) {
-        Intent intent = new Intent(getApplicationContext(), AddEditTermActivity.class);
+        Intent intent = new Intent(getApplicationContext(), AddEditCourseActivity.class);
         intent.putExtra("termId", term.getId().intValue());
         startActivity(intent);
     }

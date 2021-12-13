@@ -1,6 +1,7 @@
 package android.wgunn.collegeschedulelite.DAO;
 
-import android.wgunn.collegeschedulelite.Entity.CourseAssessment;
+import android.wgunn.collegeschedulelite.Entity.CourseAssessmentEntity;
+import android.wgunn.collegeschedulelite.Entity.CourseEntity;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -16,21 +17,24 @@ import java.util.List;
  * courseAssessmentDAO interface
  *
  * This interface defines the standard CRUD operations to be
- * performed on the CourseAssessment entity
+ * performed on the CourseAssessmentEntity entity
  * </pre>
  */
 @Dao
 public interface CourseAssessmentDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Long insert(CourseAssessment courseAssessment);
+    Long insert(CourseAssessmentEntity courseAssessmentEntity);
 
     @Update
-    public void update(CourseAssessment courseAssessment);
+    public void update(CourseAssessmentEntity courseAssessmentEntity);
 
     @Delete
-    void delete(CourseAssessment courseAssessment);
+    void delete(CourseAssessmentEntity courseAssessmentEntity);
+
+    @Query("SELECT * FROM course_assessments WHERE id = :id")
+    CourseAssessmentEntity load(long id);
 
     @Query("SELECT * FROM course_assessments")
-    List<CourseAssessment> getAll();
+    List<CourseAssessmentEntity> loadAll();
 }

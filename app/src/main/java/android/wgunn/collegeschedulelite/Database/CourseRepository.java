@@ -4,8 +4,8 @@ import android.app.Application;
 import android.wgunn.collegeschedulelite.DAO.CourseAssessmentDAO;
 import android.wgunn.collegeschedulelite.DAO.CourseDAO;
 import android.wgunn.collegeschedulelite.DAO.CourseNoteDAO;
+import android.wgunn.collegeschedulelite.Entity.CourseAssessmentEntity;
 import android.wgunn.collegeschedulelite.Entity.CourseEntity;
-import android.wgunn.collegeschedulelite.Entity.CourseAssessment;
 import android.wgunn.collegeschedulelite.Entity.CourseNoteEntity;
 import android.wgunn.collegeschedulelite.Entity.CourseWithChildren;
 
@@ -35,7 +35,7 @@ public class CourseRepository {
     /**
      * Constructor gets the database instance and initialize the DAO's
      *
-     * @param application The epplication context
+     * @param application The application context
      */
     public CourseRepository(Application application) {
         AppDatabase db = AppDatabase.getInstance(application);
@@ -61,8 +61,8 @@ public class CourseRepository {
      * @param id
      * @return The selected course with related courses
      */
-    public CourseWithChildren getWithNotes(Long id) {
-        return courseDAO.loadWithNotes(id);
+    public CourseWithChildren getWithChildren(Long id) {
+        return courseDAO.loadWithChildren(id);
     }
 
     /**
@@ -79,7 +79,7 @@ public class CourseRepository {
      *
      * @return List of CourseWithNotes data objects
      */
-    public List<CourseWithChildren> getAllWithNotes() {
+    public List<CourseWithChildren> getAllWithChildren() {
         return courseDAO.loadAllWithChildren();
     }
 
@@ -128,14 +128,31 @@ public class CourseRepository {
     }
 
     /**
+     * Get a course note entity by ID
+     *
+     * @param id The CourseNoteEntity ID
+     * @return The selected course note or null
+     */
+    public CourseNoteEntity getNote(Long id) {
+        return courseNoteDAO.load(id);
+    }
+
+    /**
      * Add a note and attach to a course
      *
-     * @param course The CourseEntity entity
      * @param note The CourseNoteEntity entity
      */
-    public void addNote(CourseEntity course, CourseNoteEntity note) {
-        note.setCourseId(course.getId());
+    public void addNote(CourseNoteEntity note) {
         note.setId(courseNoteDAO.insert(note));
+    }
+
+    /**
+     * Update a note
+     *
+     * @param note The CourseNoteEntity entity
+     */
+    public void updateNote(CourseNoteEntity note) {
+        courseNoteDAO.update(note);
     }
 
     /**
@@ -148,12 +165,22 @@ public class CourseRepository {
     }
 
     /**
+     * Get a course assessment entity by ID
+     *
+     * @param id The CourseAssessmentEntity ID
+     * @return The selected course note or null
+     */
+    public CourseAssessmentEntity getAssessment(Long id) {
+        return courseAssessmentDAO.load(id);
+    }
+
+    /**
      * Add a note and attach to a course
      *
      * @param course The CourseEntity entity
-     * @param assessment The CourseAssessment entity
+     * @param assessment The CourseAssessmentEntity entity
      */
-    public void addAssessment(CourseEntity course, CourseAssessment assessment) {
+    public void addAssessment(CourseEntity course, CourseAssessmentEntity assessment) {
         assessment.setCourseId(course.getId());
         assessment.setId(courseAssessmentDAO.insert(assessment));
     }
@@ -161,9 +188,9 @@ public class CourseRepository {
     /**
      * Delete the provided assessment
      *
-     * @param assessment The CourseAssessment entity
+     * @param assessment The CourseAssessmentEntity entity
      */
-    public void deleteAssessment(CourseAssessment assessment) {
+    public void deleteAssessment(CourseAssessmentEntity assessment) {
         courseAssessmentDAO.delete(assessment);
     }
 }
