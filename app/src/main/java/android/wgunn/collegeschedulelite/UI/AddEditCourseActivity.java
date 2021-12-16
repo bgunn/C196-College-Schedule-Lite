@@ -12,6 +12,7 @@ import android.wgunn.collegeschedulelite.Database.TermRepository;
 import android.wgunn.collegeschedulelite.Entity.CourseEntity;
 import android.wgunn.collegeschedulelite.Entity.TermEntity;
 import android.wgunn.collegeschedulelite.R;
+import android.wgunn.collegeschedulelite.Utilities.Alerts;
 import android.wgunn.collegeschedulelite.Utilities.DatePickerFragment;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -51,13 +52,13 @@ public class AddEditCourseActivity extends AppCompatActivity implements DatePick
         termRepository = new TermRepository(getApplication());
 
         Intent intent = getIntent();
-        long courseId = (long) intent.getIntExtra("courseId", 0);
-        long termId = (long) intent.getIntExtra("termId", 0);
+        long courseId = intent.getIntExtra("courseId", 0);
+        long termId = intent.getIntExtra("termId", 0);
         
         this.setTitle(courseId == 0 ? "Add Course" : "Edit Course");
 
         // Setup the status dropdown selector
-        statusSpinner = (Spinner)findViewById(R.id.statusSelector);
+        statusSpinner = findViewById(R.id.statusSelector);
         ArrayAdapter<String> statusAdapter = new ArrayAdapter<String>(AddEditCourseActivity.this, android.R.layout.simple_spinner_item, statusList);
 
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -68,7 +69,7 @@ public class AddEditCourseActivity extends AppCompatActivity implements DatePick
             termsList.add(t.getName());
         }
 
-        termsSpinner = (Spinner)findViewById(R.id.termSelector);
+        termsSpinner = findViewById(R.id.termSelector);
         ArrayAdapter<String> termsAdapter = new ArrayAdapter<String>(AddEditCourseActivity.this, android.R.layout.simple_spinner_item, termsList);
 
         termsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -76,6 +77,8 @@ public class AddEditCourseActivity extends AppCompatActivity implements DatePick
 
         if (courseId != 0) {
             setEditCourseData(courseId);
+        } else if (termId != 0) {
+            termsSpinner.setSelection(termsList.indexOf(termRepository.get(termId).getName()));
         }
     }
 
@@ -182,6 +185,21 @@ public class AddEditCourseActivity extends AppCompatActivity implements DatePick
             Log.e("myError", Log.getStackTraceString(e));
             return;
         }
+
+        int startRC = Integer.parseInt(course.getId() + "" + 1);
+        int endRC = Integer.parseInt(course.getId() + "" + 2);
+
+        String AlertTitle = "Course Notification";
+        String startAlertMsg = "Course " + course.getTitle() + " starts on " + sdf.format(course.getStartDate());
+        String endAlertMsg = "Course " + course.getTitle() + " ends on " + sdf.format(course.getEndDate());
+
+        // Set the start and end alert times to 1 week before the course start/end date
+        long startAlertTime = course.getStartDate().getTime() - (86400000 * 7);
+        long endAlertTime = course.getEndDate().getTime() - (86400000 * 7);
+
+        Alerts alerts = new Alerts();
+        alerts.createAlert(getApplicationContext(), startRC, startAlertTime, "course", course.getId().intValue(), AlertTitle, startAlertMsg);
+        alerts.createAlert(getApplicationContext(), endRC, endAlertTime, "course", course.getId().intValue(), AlertTitle, endAlertMsg);
 
         Intent intent = new Intent(getApplicationContext(), CourseDetailActivity.class);
         intent.putExtra("courseId", course.getId().intValue());

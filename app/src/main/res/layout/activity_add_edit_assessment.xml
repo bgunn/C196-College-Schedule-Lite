@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.AddEditAssessmentActivity">
+
+    <TextView
+        android:id="@+id/titleLabel"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="42dp"
+        android:gravity="end|center_vertical"
+        android:text="@string/title_field_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/titleData"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:gravity="center_vertical"
+        android:hint="@string/title_hint"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/titleLabel"
+        app:layout_constraintTop_toTopOf="@+id/titleLabel" />
+
+    <TextView
+        android:id="@+id/typeLabel"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:text="@string/type_field_label"
+        android:textColor="@color/black"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:gravity="end|center_vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
+
+    <Spinner
+        android:id="@+id/typeSelector"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toEndOf="@+id/typeLabel"
+        app:layout_constraintTop_toTopOf="@+id/typeLabel" />
+
+    <TextView
+        android:id="@+id/dateLabel"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:text="@string/date_field_label"
+        android:textColor="@color/black"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:gravity="end|center_vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/typeLabel" />
+
+    <TextView
+        android:id="@+id/dateData"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:gravity="center_vertical"
+        android:hint="@string/start_date_hint"
+        android:onClick="showDatePickerDialog"
+        app:layout_constraintStart_toEndOf="@+id/dateLabel"
+        app:layout_constraintTop_toTopOf="@+id/dateLabel"
+        app:drawableLeftCompat="@drawable/ic_calendar_foreground" />
+
+    <TextView
+        android:id="@+id/timeLabel"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="92dp"
+        android:gravity="end|center_vertical"
+        android:text="@string/time_field_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateLabel" />
+
+    <TimePicker
+        android:id="@+id/timeData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:timePickerMode="spinner"
+        app:layout_constraintStart_toEndOf="@+id/dateLabel"
+        app:layout_constraintTop_toTopOf="@+id/dateLabel" />
+
+    <TextView
+        android:id="@+id/courseNotificationNotice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="184dp"
+        android:text="@string/assessment_notice"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeLabel" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/blue_700"
+        android:onClick="onSaveButtonClick"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="@android:color/darker_gray"
+        android:onClick="onCancelButtonClick"
+        android:text="@string/cancel"
+        app:layout_constraintStart_toEndOf="@+id/saveButton"
+        app:layout_constraintTop_toTopOf="@+id/saveButton"
+        tools:ignore="OnClick" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

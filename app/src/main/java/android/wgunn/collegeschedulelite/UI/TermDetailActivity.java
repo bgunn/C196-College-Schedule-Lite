@@ -2,11 +2,13 @@ package android.wgunn.collegeschedulelite.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.wgunn.collegeschedulelite.Database.CourseRepository;
 import android.wgunn.collegeschedulelite.Database.TermRepository;
 import android.wgunn.collegeschedulelite.Entity.CourseEntity;
 import android.wgunn.collegeschedulelite.Entity.TermEntity;
@@ -15,6 +17,7 @@ import android.wgunn.collegeschedulelite.R;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -142,5 +145,23 @@ public class TermDetailActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), AddEditTermActivity.class);
         intent.putExtra("termId", term.getId().intValue());
         startActivity(intent);
+    }
+
+    public void onDeleteTermButtonClick(View view) {
+
+        if (courses.size() > 0) {
+            Toast.makeText(this, "You cannot delete a term with courses!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        new AlertDialog.Builder(this)
+                .setTitle("Confirm Delete")
+                .setMessage("Delete term " + term.getName() + "?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> {
+                    Intent intent = new Intent(getApplicationContext(), TermListActivity.class);
+                    startActivity(intent);
+                })
+                .setNegativeButton(android.R.string.no, null).show();
     }
 }

@@ -47,4 +47,15 @@
     <string name="my_courses">My Courses</string>
     <string name="notes_heading"><b>Notes:</b></string>
     <string name="assessments_heading"><b>Assessments:</b></string>
+    <string name="delete">Delete</string>
+    <string name="title_hint">ABM2 TASK 1</string>
+    <string name="date_field_label"><b>Date:</b></string>
+    <string name="type_field_label"><b>Type:</b></string>
+    <string name="time_field_label"><b>Time:</b></string>
+    <string name="course_notice">Note: Notifications will be sent every 15 minutes starting one week before the course start date</string>
+    <string name="assessment_notice">Note: Notifications will be sent every 15 minutes starting one week before the Assessment start date</string>
+    <string name="course_field_label"><b>Course:</b></string>
+    <string name="date_time_field_label"><b>Date/Time:</b></string>
+    <string name="note_field_label"><b>Note:</b></string>
+    <string name="add_note_hint">Enter course note</string>
 </resources>

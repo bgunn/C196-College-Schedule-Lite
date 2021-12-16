@@ -106,6 +106,10 @@ public class CourseNoteEntity {
 
     @Override
     public String toString() {
+        if (note.length() > 45) {
+            return note.substring(0, 45) + "...";
+        }
+
         return note;
     }
 }

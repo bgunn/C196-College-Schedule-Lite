@@ -177,12 +177,19 @@ public class CourseRepository {
     /**
      * Add a note and attach to a course
      *
-     * @param course The CourseEntity entity
      * @param assessment The CourseAssessmentEntity entity
      */
-    public void addAssessment(CourseEntity course, CourseAssessmentEntity assessment) {
-        assessment.setCourseId(course.getId());
+    public void addAssessment(CourseAssessmentEntity assessment) {
         assessment.setId(courseAssessmentDAO.insert(assessment));
+    }
+
+    /**
+     * Update an assessment
+     *
+     * @param assessment The CourseAssessmentEntity entity
+     */
+    public void updateAssessment(CourseAssessmentEntity assessment) {
+        courseAssessmentDAO.update(assessment);
     }
 
     /**

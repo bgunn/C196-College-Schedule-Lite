@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.NoteDetailActivity">
+
+    <ImageButton
+        android:id="@+id/shareNoteImageButton"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_marginRight="2dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_share_foreground"
+        android:background="?android:selectableItemBackground"
+        android:onClick="onShareNoteButtonClick"
+        app:layout_constraintEnd_toStartOf="@+id/editNoteImageButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/editNoteImageButton"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_marginRight="2dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit_note_foreground"
+        android:background="?android:selectableItemBackground"
+        android:onClick="onEditNoteButtonClick"
+        app:layout_constraintEnd_toStartOf="@+id/deleteNoteImageButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/deleteNoteImageButton"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="4dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_delete_foreground"
+        android:background="?android:selectableItemBackground"
+        android:onClick="onDeleteNoteButtonClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/noteData"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editNoteImageButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,13 +33,24 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_marginTop="4dp"
-                android:layout_marginRight="4dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_edit_note_foreground"
                 android:background="?android:selectableItemBackground"
                 android:onClick="onEditTermButtonClick"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/deleteTermImageButton"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/deleteTermImageButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="4dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_delete_foreground"
+                android:background="?android:selectableItemBackground"
+                android:onClick="onDeleteTermButtonClick"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editTermImageButton" />
 
             <TextView
                 android:id="@+id/startDateLabel"

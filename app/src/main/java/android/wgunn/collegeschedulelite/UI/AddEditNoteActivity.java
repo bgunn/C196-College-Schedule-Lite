@@ -6,34 +6,38 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.wgunn.collegeschedulelite.Database.CourseRepository;
-import android.wgunn.collegeschedulelite.Entity.CourseEntity;
 import android.wgunn.collegeschedulelite.Entity.CourseNoteEntity;
 import android.wgunn.collegeschedulelite.R;
+import android.widget.Button;
 import android.widget.EditText;
 
-public class AddEditCourseNoteActivity extends AppCompatActivity {
+public class AddEditNoteActivity extends AppCompatActivity {
 
-    private CourseEntity course;
+    private long courseId;
     private CourseNoteEntity note;
-    private CourseRepository courseRepository = new CourseRepository(getApplication());
+    private CourseRepository courseRepository;
     private EditText noteData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_edit_course_note);
+        setContentView(R.layout.activity_add_edit_note);
+
+        courseRepository = new CourseRepository(getApplication());
 
         noteData = findViewById(R.id.noteData);
 
         Intent intent = getIntent();
-        long courseId = intent.getIntExtra("courseId", 0);
-        long noteId = intent.getIntExtra("courseId", 0);
-
-        course = courseRepository.get(courseId);
+        long noteId = intent.getIntExtra("noteId", 0);
 
         if (noteId != 0) {
             note = courseRepository.getNote(noteId);
             noteData.setText(note.getNote());
+            this.setTitle("Edit Note");
+        } else {
+            courseId = intent.getIntExtra("courseId", 0);
+            this.setTitle("Add Note");
         }
     }
 
@@ -45,8 +49,13 @@ public class AddEditCourseNoteActivity extends AppCompatActivity {
             note.setNote(noteString);
             courseRepository.updateNote(note);
         } else {
-            courseRepository.addNote(new CourseNoteEntity(noteString, course.getId()));
+            note = new CourseNoteEntity(noteString, courseId);
+            courseRepository.addNote(note);
         }
+
+        Intent intent = new Intent(getApplicationContext(), CourseDetailActivity.class);
+        intent.putExtra("courseId", note.getCourseId().intValue());
+        startActivity(intent);
     }
 
     public void onCancelButtonClick(View view) {

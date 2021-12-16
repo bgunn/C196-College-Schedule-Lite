@@ -2,8 +2,10 @@ package android.wgunn.collegeschedulelite.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.wgunn.collegeschedulelite.Database.CourseRepository;
 import android.wgunn.collegeschedulelite.Database.TermRepository;
@@ -13,6 +15,9 @@ import android.wgunn.collegeschedulelite.Entity.CourseNoteEntity;
 import android.wgunn.collegeschedulelite.Entity.CourseWithChildren;
 import android.wgunn.collegeschedulelite.Entity.TermEntity;
 import android.wgunn.collegeschedulelite.R;
+import android.wgunn.collegeschedulelite.Utilities.Alerts;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -30,6 +35,8 @@ public class CourseDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent intent = getIntent();
         long courseId = intent.getIntExtra("courseId", 0);
 
@@ -43,6 +50,12 @@ public class CourseDetailActivity extends AppCompatActivity {
         this.setTitle(course.getTitle());
 
         setCourseData();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return true;
     }
 
     private void setCourseData() {
@@ -71,6 +84,33 @@ public class CourseDetailActivity extends AppCompatActivity {
 
         TextView instructorPhoneData = findViewById(R.id.instructorPhoneData);
         instructorPhoneData.setText(course.getInstructorPhone());
+
+        // Setup the notes list
+        ListView notesListView = findViewById(R.id.notesListView);
+        ArrayAdapter<CourseNoteEntity> noteAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
+        notesListView.setAdapter(noteAdapter);
+
+        noteAdapter.notifyDataSetChanged();
+
+        notesListView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(getApplicationContext(), NoteDetailActivity.class);
+            intent.putExtra("noteId", notes.get(position).getId().intValue());
+            startActivity(intent);
+        });
+
+        // Setup the assessments list
+        ListView assessmentsListView = findViewById(R.id.assessmentsListView);
+        ArrayAdapter<CourseAssessmentEntity> assessmentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, assessments);
+        assessmentsListView.setAdapter(assessmentAdapter);
+
+        assessmentAdapter.notifyDataSetChanged();
+
+        // Finish the detail view!!!
+        assessmentsListView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(getApplicationContext(), AssessmentDetailActivity.class);
+            intent.putExtra("assessmentId", assessments.get(position).getId().intValue());
+            startActivity(intent);
+        });
     }
 
     public void onEditCourseButtonClick(View view) {
@@ -80,11 +120,40 @@ public class CourseDetailActivity extends AppCompatActivity {
     }
 
     public void onAddNoteButtonClick(View view) {
-        Intent intent = new Intent(getApplicationContext(), AddEditCourseNoteActivity.class);
+        Intent intent = new Intent(getApplicationContext(), AddEditNoteActivity.class);
         intent.putExtra("courseId", course.getId().intValue());
         startActivity(intent);
     }
 
     public void onAddAssessmentButtonClick(View view) {
+        Intent intent = new Intent(getApplicationContext(), AddEditAssessmentActivity.class);
+        intent.putExtra("courseId", course.getId().intValue());
+        startActivity(intent);
+    }
+
+    public void onDeleteCourseButtonClick(View view) {
+
+        int termId = Math.toIntExact(course.getTermId());
+
+        new AlertDialog.Builder(this)
+            .setTitle("Confirm Delete")
+            .setMessage("Delete course " + course.getTitle() + "?")
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> {
+
+                int startRC = Integer.parseInt(course.getId() + "" + 1);
+                int endRC = Integer.parseInt(course.getId() + "" + 2);
+
+                Alerts alerts = new Alerts();
+                alerts.cancelAlert(getApplicationContext(), startRC);
+                alerts.cancelAlert(getApplicationContext(), endRC);
+
+                new CourseRepository(getApplication()).delete(course);
+
+                Intent intent = new Intent(getApplicationContext(), TermDetailActivity.class);
+                intent.putExtra("termId", termId);
+                startActivity(intent);
+            })
+            .setNegativeButton(android.R.string.no, null).show();
     }
 }

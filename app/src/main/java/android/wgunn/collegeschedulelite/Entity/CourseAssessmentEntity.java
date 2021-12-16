@@ -9,6 +9,8 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * The CourseAssessmentEntity entity models a row in the course_assessments table. The CourseAssessmentEntity
  * represents a one-to-many relationship with a CourseEntity.
@@ -54,6 +56,13 @@ public class CourseAssessmentEntity {
      */
     @ColumnInfo(name = "date")
     private LocalDateTime dateTime;
+
+    public CourseAssessmentEntity(Long courseId, String title, String type, LocalDateTime dateTime) {
+        this.courseId = courseId;
+        this.title = title;
+        this.type = type;
+        this.dateTime = dateTime;
+    }
 
     /**
      * The course asessment ID getter
@@ -133,5 +142,11 @@ public class CourseAssessmentEntity {
      */
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
+    }
+
+    @Override
+    public String toString() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return title + " - " + type + " - " + dateTime.format(dtf);
     }
 }
