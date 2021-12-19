@@ -2,7 +2,10 @@ package android.wgunn.collegeschedulelite.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +13,7 @@ import android.wgunn.collegeschedulelite.Database.CourseRepository;
 import android.wgunn.collegeschedulelite.Entity.CourseEntity;
 import android.wgunn.collegeschedulelite.Entity.CourseNoteEntity;
 import android.wgunn.collegeschedulelite.R;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class NoteDetailActivity extends AppCompatActivity {
@@ -59,12 +63,22 @@ public class NoteDetailActivity extends AppCompatActivity {
 
     public void onShareNoteButtonClick(View view) {
 
-        CourseEntity course = courseRepository.get(note.getCourseId());
+        EditText phoneNumber = new EditText(this);
+        phoneNumber.setHint("123-456-7890");
 
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_SUBJECT, course.getTitle() + " Note");
-        intent.putExtra(Intent.EXTRA_TEXT, note.getNote());
-        intent.setType("text/plain");
-        startActivity(Intent.createChooser(intent, "Share note via"));
+        new AlertDialog.Builder(this)
+            .setTitle("Share Note")
+            .setMessage("Enter recipients phone number")
+            .setView(phoneNumber)
+            .setPositiveButton("Go", (dialog, whichButton) -> {
+                Uri uri = Uri.parse("smsto:" + phoneNumber.getText().toString());
+                Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+                intent.putExtra("sms_body", note.getNote());
+                startActivity(intent);
+            })
+            .setNegativeButton("Cancel", (dialog, whichButton) -> {
+                dialog.cancel();
+            })
+            .show();
     }
 }

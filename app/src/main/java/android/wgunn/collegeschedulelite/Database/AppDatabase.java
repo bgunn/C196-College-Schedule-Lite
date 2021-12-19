@@ -15,7 +15,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {TermEntity.class, CourseEntity.class, CourseAssessmentEntity.class, CourseNoteEntity.class}, version = 6, exportSchema = false)
+@Database(entities = {TermEntity.class, CourseEntity.class, CourseAssessmentEntity.class, CourseNoteEntity.class}, version = 7, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 

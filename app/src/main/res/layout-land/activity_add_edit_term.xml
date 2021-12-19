@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.AddEditTermActivity">
+
+    <TextView
+        android:id="@+id/termNameLabel"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="42dp"
+        android:gravity="right|center_vertical"
+        android:text="@string/name_field_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/termNameData"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:gravity="center_vertical"
+        android:hint="@string/term_name_hint"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/termNameLabel"
+        app:layout_constraintTop_toTopOf="@+id/termNameLabel" />
+
+    <TextView
+        android:id="@+id/termStartDateLabel"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="@string/start_date"
+        android:textColor="@color/black"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:gravity="right|center_vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/termNameLabel" />
+
+    <TextView
+        android:id="@+id/termStartDateData"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:gravity="center_vertical"
+        android:hint="@string/start_date_hint"
+        android:onClick="showStartDatePickerDialog"
+        app:layout_constraintStart_toEndOf="@+id/termStartDateLabel"
+        app:layout_constraintTop_toTopOf="@+id/termStartDateLabel"
+        app:drawableLeftCompat="@drawable/ic_calendar_foreground" />
+
+    <TextView
+        android:id="@+id/termEndDateLabel"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="@string/end_date"
+        android:textColor="@color/black"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:gravity="right|center_vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/termStartDateLabel" />
+
+    <TextView
+        android:id="@+id/termEndDateData"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:gravity="center_vertical"
+        android:hint="@string/end_date_hint"
+        android:onClick="showEndDatePickerDialog"
+        app:layout_constraintStart_toEndOf="@+id/termEndDateLabel"
+        app:layout_constraintTop_toTopOf="@+id/termEndDateLabel"
+        app:drawableLeftCompat="@drawable/ic_calendar_foreground" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue_700"
+        android:onClick="onSaveButtonClick"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.351"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:backgroundTint="@android:color/darker_gray"
+        android:onClick="onCancelButtonClick"
+        android:text="@string/cancel"
+        app:layout_constraintStart_toEndOf="@+id/saveButton"
+        app:layout_constraintTop_toTopOf="@+id/saveButton"
+        tools:ignore="OnClick" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

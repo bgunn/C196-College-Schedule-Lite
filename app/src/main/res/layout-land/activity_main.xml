@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.MainActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/termCard"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="false"
+        android:visibility="visible"
+        app:cardBackgroundColor="@color/blue_200"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/currentTermLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_term_label"
+                android:textColor="@color/black"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/remainingTermsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/remaining_terms_label"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currentTermLabel"
+                app:layout_constraintVertical_bias="0.27" />
+
+            <TextView
+                android:id="@+id/completedTermsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/completed_terms"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/remainingTermsLabel"
+                app:layout_constraintVertical_bias="0.666" />
+
+            <TextView
+                android:id="@+id/currentTermData"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:text="@string/no_data"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/currentTermLabel"
+                app:layout_constraintTop_toTopOf="@+id/currentTermLabel" />
+
+            <TextView
+                android:id="@+id/remainingTermsData"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:text="@string/no_data"
+                android:textColor="@color/black"
+                android:layout_marginStart="12dp"
+                app:layout_constraintStart_toEndOf="@+id/remainingTermsLabel"
+                app:layout_constraintTop_toTopOf="@+id/remainingTermsLabel" />
+
+            <TextView
+                android:id="@+id/completedTermsData"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:text="@string/no_data"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toEndOf="@+id/completedTermsLabel"
+                app:layout_constraintTop_toTopOf="@+id/completedTermsLabel" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/coursesCard"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="false"
+        android:visibility="visible"
+        app:cardBackgroundColor="@color/blue_200"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintTop_toBottomOf="@+id/termCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/dashboardCoursesLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/all_courses_label"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/inProgressCoursesLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/in_progress_label"
+                android:textColor="@color/black"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dashboardCoursesLabel" />
+
+            <TextView
+                android:id="@+id/completedCoursesLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/completed_label"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inProgressCoursesLabel"
+                app:layout_constraintVertical_bias="0.1" />
+
+            <TextView
+                android:id="@+id/droppedCoursesLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/dropped_label"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/completedCoursesLabel"
+                app:layout_constraintVertical_bias="0.166" />
+
+            <TextView
+                android:id="@+id/plannedCoursesLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/planned_label"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/droppedCoursesLabel"
+                app:layout_constraintVertical_bias="0.333" />
+
+            <TextView
+                android:id="@+id/inProgressCoursesData"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="@string/no_data"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/inProgressCoursesLabel"
+                app:layout_constraintTop_toTopOf="@+id/inProgressCoursesLabel" />
+
+            <TextView
+                android:id="@+id/completedCoursesData"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:text="@string/no_data"
+                android:textColor="@color/black"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toEndOf="@+id/completedCoursesLabel"
+                app:layout_constraintTop_toTopOf="@+id/completedCoursesLabel" />
+
+            <TextView
+                android:id="@+id/droppedCoursesData"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:text="@string/no_data"
+                android:textColor="@color/black"
+                android:layout_marginStart="32dp"
+                app:layout_constraintStart_toEndOf="@+id/droppedCoursesLabel"
+                app:layout_constraintTop_toTopOf="@+id/droppedCoursesLabel" />
+
+            <TextView
+                android:id="@+id/plannedCoursesData"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:text="@string/no_data"
+                android:textColor="@color/black"
+                android:layout_marginStart="6dp"
+                app:layout_constraintStart_toEndOf="@+id/plannedCoursesLabel"
+                app:layout_constraintTop_toTopOf="@+id/plannedCoursesLabel" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <fragment
+        android:id="@+id/navFragment"
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        class="android.wgunn.collegeschedulelite.UI.NavFragment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.188"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

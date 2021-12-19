@@ -8,8 +8,10 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  * The CourseAssessmentEntity entity models a row in the course_assessments table. The CourseAssessmentEntity
@@ -52,16 +54,23 @@ public class CourseAssessmentEntity {
     private String type;
 
     /**
-     * The assessment date / time
+     * The assessment start date
      */
-    @ColumnInfo(name = "date")
-    private LocalDateTime dateTime;
+    @ColumnInfo(name = "start_date")
+    private Date startDate;
 
-    public CourseAssessmentEntity(Long courseId, String title, String type, LocalDateTime dateTime) {
+    /**
+     * The assessment end date
+     */
+    @ColumnInfo(name = "end_date")
+    private Date endDate;
+
+    public CourseAssessmentEntity(Long courseId, String title, String type, Date startDate, Date endDate) {
         this.courseId = courseId;
         this.title = title;
         this.type = type;
-        this.dateTime = dateTime;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     /**
@@ -129,24 +138,40 @@ public class CourseAssessmentEntity {
     }
 
     /**
-     * The date / time getter
-     * @return dateTime
+     * The date getter
+     * @return startDate
      */
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public Date getStartDate() {
+        return startDate;
     }
 
     /**
      * The date setter
-     * @param dateTime The assessment date
+     * @param startDate The assessment date
      */
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
+     * The date / time getter
+     * @return endDate
+     */
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * The date setter
+     * @param endDate The assessment date
+     */
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     @Override
     public String toString() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return title + " - " + type + " - " + dateTime.format(dtf);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return title + " - " + type + " - " + formatter.format(startDate);
     }
 }

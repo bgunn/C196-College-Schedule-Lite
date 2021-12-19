@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.setTitle("Dashboard");
-
         termRepository = new TermRepository(getApplication());
         courseRepository = new CourseRepository(getApplication());
 
@@ -114,6 +112,5 @@ public class MainActivity extends AppCompatActivity {
         );
 
         courseRepository.save(course1);
-        // Log.e("myError", Log.getStackTraceString(e));
     }
 }

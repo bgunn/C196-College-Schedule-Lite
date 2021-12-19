@@ -14,6 +14,7 @@ import android.wgunn.collegeschedulelite.R;
 import android.wgunn.collegeschedulelite.Utilities.Alerts;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 
 public class AssessmentDetailActivity extends AppCompatActivity {
@@ -46,9 +47,12 @@ public class AssessmentDetailActivity extends AppCompatActivity {
         TextView typeData = findViewById(R.id.typeData);
         typeData.setText(assessment.getType());
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        TextView dateData = findViewById(R.id.dateData);
-        dateData.setText(dtf.format(assessment.getDateTime()));
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        TextView startDateData = findViewById(R.id.startDateData);
+        startDateData.setText(formatter.format(assessment.getStartDate()));
+
+        TextView endDateData = findViewById(R.id.endDateData);
+        endDateData.setText(formatter.format(assessment.getEndDate()));
 
         this.setTitle("Assessment Detail");
     }
@@ -73,8 +77,12 @@ public class AssessmentDetailActivity extends AppCompatActivity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> {
 
+                    int startRC = Integer.parseInt(assessment.getId() + "" + 1);
+                    int endRC = Integer.parseInt(assessment.getId() + "" + 2);
+
                     Alerts alerts = new Alerts();
-                    alerts.cancelAlert(getApplicationContext(), assessment.getId().intValue());
+                    alerts.cancelAlert(getApplicationContext(), startRC);
+                    alerts.cancelAlert(getApplicationContext(), endRC);
 
                     Intent intent = new Intent(getApplicationContext(), CourseDetailActivity.class);
                     intent.putExtra("courseId", assessment.getCourseId().intValue());

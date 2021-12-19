@@ -175,6 +175,15 @@ public class CourseRepository {
     }
 
     /**
+     * Fetch and return all courses assessments
+     *
+     * @return List of CourseAssessmentEntity entities
+     */
+    public List<CourseAssessmentEntity> getAllAssessments() {
+        return courseAssessmentDAO.loadAll();
+    }
+
+    /**
      * Add a note and attach to a course
      *
      * @param assessment The CourseAssessmentEntity entity

@@ -54,9 +54,6 @@ public class AddEditAssessmentActivity extends AppCompatActivity implements Date
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSelector.setAdapter(typeAdapter);
 
-        timePicker = findViewById(R.id.timeData);
-        timePicker.setIs24HourView(true);
-
         courseRepository = new CourseRepository(getApplication());
 
         Intent intent = getIntent();
@@ -77,17 +74,21 @@ public class AddEditAssessmentActivity extends AppCompatActivity implements Date
 
         typeSelector.setSelection(assessmentType.indexOf(assessment.getType()));
 
-        TextView dateData = findViewById(R.id.dateData);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        dateData.setText(dtf.format(assessment.getDateTime()));
+        TextView startDateData = findViewById(R.id.startDateData);
+        startDateData.setText(sdf.format(assessment.getStartDate()));
 
-        timePicker.setHour(assessment.getDateTime().getHour());
-        timePicker.setMinute(assessment.getDateTime().getMinute());
+        TextView endDateData = findViewById(R.id.endDateData);
+        endDateData.setText(sdf.format(assessment.getEndDate()));
     }
 
-    public void showDatePickerDialog(View view) {
-        datePicker = findViewById(R.id.dateData);
-        new DatePickerFragment().show(getSupportFragmentManager(), "datePicker");
+    public void showStartDatePickerDialog(View v) {
+        datePicker = findViewById(R.id.startDateData);
+        new DatePickerFragment().show(getSupportFragmentManager(), "startDatePicker");
+    }
+
+    public void showEndDatePickerDialog(View v) {
+        datePicker = findViewById(R.id.endDateData);
+        new DatePickerFragment().show(getSupportFragmentManager(), "endDatePicker");
     }
 
     @Override
@@ -104,7 +105,9 @@ public class AddEditAssessmentActivity extends AppCompatActivity implements Date
 
     public void onSaveButtonClick(View view) {
 
-        Date date = null;
+        Date startDate = null;
+        Date endDate = null;
+        String msg;
 
         EditText titleData = findViewById(R.id.titleData);
         String title = titleData.getText().toString();
@@ -113,51 +116,57 @@ public class AddEditAssessmentActivity extends AppCompatActivity implements Date
             return;
         }
 
-        TextView dateData = findViewById(R.id.dateData);
-        String dateString = dateData.getText().toString();
-        if (dateString.isEmpty()) {
-            Toast.makeText(this, "Date is required in the form yyyy-mm-dd", Toast.LENGTH_LONG).show();
+        TextView startDateData = findViewById(R.id.startDateData);
+        String startDateString = startDateData.getText().toString();
+        if (startDateString.isEmpty()) {
+            Toast.makeText(this, "Start date is required in the form yyyy-mm-dd", Toast.LENGTH_LONG).show();
             return;
         }
 
+        TextView endDateData = findViewById(R.id.endDateData);
+        String endDateString = endDateData.getText().toString();
+        if (endDateString.isEmpty()) {
+            Toast.makeText(this, "End date is required in the form yyyy-mm-dd", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Attempt to parse the date strings
         try {
-            date = sdf.parse(dateString);
+            startDate = sdf.parse(startDateString);
+            endDate = sdf.parse(endDateString);
         } catch (ParseException e) {
             Toast.makeText(this, "ERROR: Date must be in the format yyyy-mm-dd", Toast.LENGTH_LONG).show();
             Log.e("myError", Log.getStackTraceString(e));
             return;
         }
 
-        // Create a LocalDateTime object from the date and time values
-        int hour = timePicker.getHour();
-        int min = timePicker.getMinute();
-
-        String dateTimeString = dateString + " " + String.format("%02d:%02d", hour, min);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
-        // Caused by: java.time.format.DateTimeParseException: Text '2021-12-31 8:30' could not be parsed at index 11
-        LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, dtf);
-
         String type = typeSelector.getSelectedItem().toString();
 
         if (assessment != null) {
             assessment.setTitle(title);
             assessment.setType(type);
-            assessment.setDateTime(dateTime);
+            assessment.setStartDate(startDate);
+            assessment.setEndDate(endDate);
             courseRepository.updateAssessment(assessment);
         } else {
-            assessment = new CourseAssessmentEntity(courseId, title, type, dateTime);
+            assessment = new CourseAssessmentEntity(courseId, title, type, startDate, endDate);
             courseRepository.addAssessment(assessment);
         }
 
         String AlertTitle = "Assessment Notification";
-        String startAlertMsg = "Assessment " + assessment.getTitle() + " starts on " + dtf.format(assessment.getDateTime());
+        String startAlertMsg = "Assessment " + assessment.getTitle() + " starts on " + sdf.format(assessment.getStartDate());
+        String endAlertMsg = "Assessment " + assessment.getTitle() + " ends on " + sdf.format(assessment.getEndDate());
 
         // Set the start and end alert times to 1 week before the course start/end date
-        long startAlertTime = assessment.getDateTime().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli() - (86400000 * 7);
+        long startAlertTime = assessment.getStartDate().getTime() - (86400000 * 7);
+        long endAlertTime = assessment.getEndDate().getTime() - (86400000 * 7);
+
+        int startRC = Integer.parseInt(assessment.getId() + "" + 1);
+        int endRC = Integer.parseInt(assessment.getId() + "" + 2);
 
         Alerts alerts = new Alerts();
-        alerts.createAlert(getApplicationContext(), assessment.getId().intValue(), startAlertTime, "assessment", assessment.getId().intValue(), AlertTitle, startAlertMsg);
+        alerts.createAlert(getApplicationContext(), startRC, startAlertTime, "assessment", assessment.getId().intValue(), AlertTitle, startAlertMsg);
+        alerts.createAlert(getApplicationContext(), endRC, endAlertTime, "assessment", assessment.getId().intValue(), AlertTitle, endAlertMsg);
 
         Intent intent = new Intent(getApplicationContext(), CourseDetailActivity.class);
         intent.putExtra("courseId", assessment.getCourseId().intValue());
