@@ -61,4 +61,5 @@
     <string name="my_assessments">My Assessments</string>
     <string name="start_date_field_label"><b>Start Date:</b></string>
     <string name="end_date_field_label"><b>End Date:</b></string>
+    <string name="enable_alerts"><b>Enable alerts?</b> (alerts will fire every 15 minutes starting one week from the start and end date)</string>
 </resources>

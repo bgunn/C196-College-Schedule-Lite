@@ -13,6 +13,7 @@ import android.wgunn.collegeschedulelite.R;
 import android.wgunn.collegeschedulelite.Utilities.Alerts;
 import android.wgunn.collegeschedulelite.Utilities.DatePickerFragment;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -153,20 +154,55 @@ public class AddEditAssessmentActivity extends AppCompatActivity implements Date
             courseRepository.addAssessment(assessment);
         }
 
-        String AlertTitle = "Assessment Notification";
-        String startAlertMsg = "Assessment " + assessment.getTitle() + " starts on " + sdf.format(assessment.getStartDate());
-        String endAlertMsg = "Assessment " + assessment.getTitle() + " ends on " + sdf.format(assessment.getEndDate());
 
-        // Set the start and end alert times to 1 week before the course start/end date
-        long startAlertTime = assessment.getStartDate().getTime() - (86400000 * 7);
-        long endAlertTime = assessment.getEndDate().getTime() - (86400000 * 7);
+        /**
+         *         // Add or remove alerts
+         *         CheckBox enableAlerts = findViewById(R.id.enableAlerts);
+         *         Alerts alerts = new Alerts();
+         *
+         *         int startRC = Integer.parseInt(course.getId() + "" + 1);
+         *         int endRC = Integer.parseInt(course.getId() + "" + 2);
+         *
+         *         Alerts alerts = new Alerts();
+         *
+         *         if (enableAlerts.isChecked()) {
+         *             String AlertTitle = "Course Notification";
+         *             String startAlertMsg = "Course " + course.getTitle() + " starts on " + sdf.format(course.getStartDate());
+         *             String endAlertMsg = "Course " + course.getTitle() + " ends on " + sdf.format(course.getEndDate());
+         *
+         *             // Set the start and end alert times to 1 week before the course start/end date
+         *             long startAlertTime = course.getStartDate().getTime() - (86400000 * 7);
+         *             long endAlertTime = course.getEndDate().getTime() - (86400000 * 7);
+         *
+         *             alerts.createAlert(getApplicationContext(), startRC, startAlertTime, "course", course.getId().intValue(), AlertTitle, startAlertMsg);
+         *             alerts.createAlert(getApplicationContext(), endRC, endAlertTime, "course", course.getId().intValue(), AlertTitle, endAlertMsg);
+         *         } else {
+         *             alerts.cancelAlert(getApplicationContext(), startRC);
+         *             alerts.cancelAlert(getApplicationContext(), endRC);
+         *         }
+         */
+
+        CheckBox enableAlerts = findViewById(R.id.enableAlerts);
+        Alerts alerts = new Alerts();
 
         int startRC = Integer.parseInt(assessment.getId() + "" + 1);
         int endRC = Integer.parseInt(assessment.getId() + "" + 2);
 
-        Alerts alerts = new Alerts();
-        alerts.createAlert(getApplicationContext(), startRC, startAlertTime, "assessment", assessment.getId().intValue(), AlertTitle, startAlertMsg);
-        alerts.createAlert(getApplicationContext(), endRC, endAlertTime, "assessment", assessment.getId().intValue(), AlertTitle, endAlertMsg);
+        if (enableAlerts.isChecked()) {
+            String AlertTitle = "Assessment Notification";
+            String startAlertMsg = "Assessment " + assessment.getTitle() + " starts on " + sdf.format(assessment.getStartDate());
+            String endAlertMsg = "Assessment " + assessment.getTitle() + " ends on " + sdf.format(assessment.getEndDate());
+
+            // Set the start and end alert times to 1 week before the course start/end date
+            long startAlertTime = assessment.getStartDate().getTime() - (86400000 * 7);
+            long endAlertTime = assessment.getEndDate().getTime() - (86400000 * 7);
+
+            alerts.createAlert(getApplicationContext(), startRC, startAlertTime, "assessment", assessment.getId().intValue(), AlertTitle, startAlertMsg);
+            alerts.createAlert(getApplicationContext(), endRC, endAlertTime, "assessment", assessment.getId().intValue(), AlertTitle, endAlertMsg);
+        } else {
+            alerts.cancelAlert(getApplicationContext(), startRC);
+            alerts.cancelAlert(getApplicationContext(), endRC);
+        }
 
         Intent intent = new Intent(getApplicationContext(), CourseDetailActivity.class);
         intent.putExtra("courseId", assessment.getCourseId().intValue());
